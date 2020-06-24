@@ -36,6 +36,7 @@ import android.view.ViewGroup
 import com.raywenderlich.android.creaturemon.R
 import com.raywenderlich.android.creaturemon.app.inflate
 import com.raywenderlich.android.creaturemon.model.Creature
+import kotlinx.android.synthetic.main.list_item_avatar.view.*
 import kotlinx.android.synthetic.main.list_item_creature.view.*
 
 class CreatureAdapter(private val creatures: MutableList<Creature>)
@@ -63,7 +64,11 @@ class CreatureAdapter(private val creatures: MutableList<Creature>)
 
     fun bind(creature: Creature) {
       this.creature = creature
-      // TODO: populate views
+      itemView.apply {
+        name.text = creature.name
+        hitPoints.text = creature.hitPoints.toString()
+        avatarListItem.setImageDrawable(itemView.context.getDrawable(creature.drawable))
+      }
     }
   }
 }

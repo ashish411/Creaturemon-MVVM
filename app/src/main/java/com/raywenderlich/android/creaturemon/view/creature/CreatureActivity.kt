@@ -40,6 +40,7 @@ import android.text.TextWatcher
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import android.widget.Toast
 import com.raywenderlich.android.creaturemon.R
 import com.raywenderlich.android.creaturemon.model.AttributeStore
 import com.raywenderlich.android.creaturemon.model.AttributeType.ENDURANCE
@@ -124,12 +125,16 @@ class CreatureActivity : AppCompatActivity(), AvatarAdapter.AvatarListener {
     }
 
     saveButton.setOnClickListener {
-      // TODO: handle save button clicked
+      if (viewmodel.saveCreature()){
+        Toast.makeText(this,getString(R.string.creature_saved),Toast.LENGTH_SHORT).show()
+        finish()
+      }
+      else
+        Toast.makeText(this,getString(R.string.error_saving_creature),Toast.LENGTH_SHORT).show()
     }
   }
 
   override fun avatarClicked(avatar: Avatar) {
-    // TODO: handle avatar clicked
     viewmodel.drawableSelected(avatar.drawable)
     hideTapLabel()
   }
